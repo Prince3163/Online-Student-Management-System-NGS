@@ -34,7 +34,7 @@ public class AddServlet extends HttpServlet {
 
                 try (Connection con = DriverManager.getConnection(url,username,password) ){
                     PreparedStatement pstm = con.prepareStatement("INSERT INTO students ('name','email','phone','course','year_of_study' ) values(?,?,?,?,?)");
-                    pstm.setString(1,);
+                   // pstm.setString(1,);
 //                    if(rs.next()){
 //                        HttpSession session = req.getSession();
 //                        session.setAttribute("login_id",login_id);
@@ -45,11 +45,11 @@ public class AddServlet extends HttpServlet {
 //                        req.setAttribute("errorMessage","Invalid Credentials :( ");
 //                        req.getRequestDispatcher("login.jsp").forward(req,resp);
 //                    }
-//                }
-//                catch (SQLException e){
-//                    //Make this Better
-//                    System.out.println(e.getMessage());
-//                }
+                }
+                catch (SQLException e){
+                    //Make this Better
+                    System.out.println(e.getMessage());
+                }
             }
             catch(ClassNotFoundException e){
                 //Make this Better

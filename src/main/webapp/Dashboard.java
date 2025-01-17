@@ -24,33 +24,33 @@ public class Dashboard extends HttpServlet{
             resp.sendRedirect("login.jsp");
             return;
         }
-        String login_id = session.getAttribute("login_id").toString();
-        PrintWriter out= resp.getWriter();
-
-        out.write("<html><head>");
-        out.write("<style>");
-        out.write(".header { display: flex; justify-content: space-between; align-items: center; }");
-        out.write(".logout { margin-left: auto; }");
-        out.write("</style>");
-        out.write("</head><body>");
-        out.write("<div class='header'>");
-        out.write("<h2>Welcome, " + login_id + "!</h2>");
-        out.write("<a class='logout' href='Logout'>Logout</a>");
-        out.write("</div>");
-        out.write("<br><br>");
-
-        out.write("<form action='view.jsp' >");
-        out.write("<input type='submit' value='View Student'>");
-        out.write("</form>");
-
-        out.write("<br>");
-        out.write("<br>");
-
-        out.write("<form action='add.jsp' >");
-        out.write("<input type='submit' value='Add Student'>");
-        out.write("</form>");
-
-        out.write("</body></html>");
+//        String login_id = session.getAttribute("login_id").toString();
+//        PrintWriter out= resp.getWriter();
+//
+//        out.write("<html><head>");
+//        out.write("<style>");
+//        out.write(".header { display: flex; justify-content: space-between; align-items: center; }");
+//        out.write(".logout { margin-left: auto; }");
+//        out.write("</style>");
+//        out.write("</head><body>");
+//        out.write("<div class='header'>");
+//        out.write("<h2>Welcome, " + login_id + "!</h2>");
+//        out.write("<a class='logout' href='Logout'>Logout</a>");
+//        out.write("</div>");
+//        out.write("<br><br>");
+//
+//        out.write("<form action='view.jsp' >");
+//        out.write("<input type='submit' value='View Student'>");
+//        out.write("</form>");
+//
+//        out.write("<br>");
+//        out.write("<br>");
+//
+//        out.write("<form action='add.jsp' >");
+//        out.write("<input type='submit' value='Add Student'>");
+//        out.write("</form>");
+//
+//        out.write("</body></html>");
 
 
         try{
@@ -81,6 +81,8 @@ public class Dashboard extends HttpServlet{
                 }
 
                 session.setAttribute("data",data);
+
+                req.getRequestDispatcher("view.jsp").forward(req,resp);
 
             }
             catch (SQLException e){

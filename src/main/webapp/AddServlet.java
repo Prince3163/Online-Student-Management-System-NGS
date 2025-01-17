@@ -51,8 +51,9 @@ public class AddServlet extends HttpServlet {
 
                     int insertedRaw = pstm.executeUpdate();
                     if (insertedRaw > 0) {
-                        req.setAttribute("errorMessage", "Data Inserted :) ");
-                        req.getRequestDispatcher("add.jsp").forward(req, resp);
+//                        req.setAttribute("errorMessage", "Data Inserted :) ");
+//                        req.getRequestDispatcher("add.jsp").forward(req, resp);
+                        resp.sendRedirect("Dashboard");
                     } else {
                         req.setAttribute("errorMessage", "Something Went Wrong, Try Again! ");
                         req.getRequestDispatcher("add.jsp").forward(req, resp);

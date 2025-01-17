@@ -3,37 +3,43 @@
     <title>
         Add Student
     </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
+
+   <div class="form-container">
+
     <h1>Add Student</h1>
 
     <form action="AddServlet" method="post">
-        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="text" class="inputField" name="name" placeholder="Name..." required>
         <br>
         <br>
-        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="email" class="inputField" name="email" placeholder="Email..." required>
         <br>
         <br>
-        <input type="text" name="phone" placeholder="Enter Phone" required>
+        <input type="text" class="inputField" name="phone" placeholder="Phone..." required>
         <br>
         <br>
-        <input type="text" name="course" placeholder="Enter Course" required>
+        <input type="text" class="inputField" name="course" placeholder="Course..." required>
         <br>
         <br>
-        <input type="number"  name="Year_of_Study" placeholder="Enter Year-of-Study" required>
+        <input type="number" class="inputField" name="Year_of_Study" placeholder="Year-of-Study..." required>
         <br>
         <br>
-        <input type="submit" value="Add Student" style="background-color: green; color: white;">
+        <input type="submit" class="btn" value="Add Student" style="background-color: green; color: white;">
     </form>
 
     <%
             String errorMessage = (String) request.getAttribute("errorMessage");
             if (errorMessage != null) {
             %>
-                <p > <%=errorMessage %></p>
+                <p class="error-message" > <%=errorMessage %></p>
             <%
             }
     %>
 
+</div>
 </body>
 </html>

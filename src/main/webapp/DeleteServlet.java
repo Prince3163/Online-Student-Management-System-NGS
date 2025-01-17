@@ -14,7 +14,7 @@ import java.sql.*;
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String email = req.getParameter("id");
 

@@ -1,7 +1,6 @@
 //Not Completed
 package main.webapp;
 
-import com.sun.net.httpserver.HttpContext;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         String login_id = req.getParameter("username");
         String login_pwd = req.getParameter("password");
 
-        if(login_id !=" " && !login_id.isEmpty() && !login_pwd.isEmpty() && login_pwd!=" "){
+        if(login_id !="" && !login_id.isEmpty()  && !login_pwd.isEmpty() && login_pwd!=""){
             try{
                 ServletContext ctx = getServletContext();
 

@@ -5,6 +5,12 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <welcome-file-list>
+    <welcome-file>
+      login.jsp
+    </welcome-file>
+  </welcome-file-list>
+
   <context-param>
     <param-name>url</param-name>
     <param-value>jdbc:postgresql://localhost:5432/osms</param-value>

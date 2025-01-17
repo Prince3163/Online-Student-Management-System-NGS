@@ -1,6 +1,9 @@
 <html>
 <head>
      <link rel="stylesheet" type="text/css" href="style.css">
+     <title>
+             Log-In
+     </title>
 </head>
 <body>
 
@@ -12,9 +15,7 @@
             <input class="inputField" type="password" name="password" placeholder="Password..."  required>
             <br>
             <input class="btn" type="submit" name="submit">
-
         </form>
-
 
     <%
         String errorMessage = (String) request.getAttribute("errorMessage");

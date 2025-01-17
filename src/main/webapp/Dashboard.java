@@ -9,10 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @WebServlet("/Dashboard")
 public class Dashboard extends HttpServlet{
@@ -24,34 +22,6 @@ public class Dashboard extends HttpServlet{
             resp.sendRedirect("login.jsp");
             return;
         }
-//        String login_id = session.getAttribute("login_id").toString();
-//        PrintWriter out= resp.getWriter();
-//
-//        out.write("<html><head>");
-//        out.write("<style>");
-//        out.write(".header { display: flex; justify-content: space-between; align-items: center; }");
-//        out.write(".logout { margin-left: auto; }");
-//        out.write("</style>");
-//        out.write("</head><body>");
-//        out.write("<div class='header'>");
-//        out.write("<h2>Welcome, " + login_id + "!</h2>");
-//        out.write("<a class='logout' href='Logout'>Logout</a>");
-//        out.write("</div>");
-//        out.write("<br><br>");
-//
-//        out.write("<form action='view.jsp' >");
-//        out.write("<input type='submit' value='View Student'>");
-//        out.write("</form>");
-//
-//        out.write("<br>");
-//        out.write("<br>");
-//
-//        out.write("<form action='add.jsp' >");
-//        out.write("<input type='submit' value='Add Student'>");
-//        out.write("</form>");
-//
-//        out.write("</body></html>");
-
 
         try{
             ServletContext ctx = getServletContext();
@@ -94,7 +64,5 @@ public class Dashboard extends HttpServlet{
             //Make this Better
             System.out.println(e.getMessage());
         }
-
-
     }
 }

@@ -1,12 +1,18 @@
 <html>
 <head>
     <title>
-        Add Student
+        Add-New-Student
     </title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
+<%
+    if (session == null || session.getAttribute("data") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 
    <div class="form-container">
 

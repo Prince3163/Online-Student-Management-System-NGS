@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.*;
@@ -14,6 +15,14 @@ import java.sql.*;
 public class AddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        if (session == null || session.getAttribute("login_id") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
@@ -51,8 +60,6 @@ public class AddServlet extends HttpServlet {
 
                     int insertedRaw = pstm.executeUpdate();
                     if (insertedRaw > 0) {
-//                        req.setAttribute("errorMessage", "Data Inserted :) ");
-//                        req.getRequestDispatcher("add.jsp").forward(req, resp);
                         resp.sendRedirect("Dashboard");
                     } else {
                         req.setAttribute("errorMessage", "Something Went Wrong, Try Again! ");

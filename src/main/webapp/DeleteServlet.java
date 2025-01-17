@@ -16,7 +16,15 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        HttpSession session = req.getSession();
+
+        if (session == null || session.getAttribute("login_id") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+
         String email = req.getParameter("id");
+
 
         try{
             ServletContext ctx = getServletContext();
@@ -34,7 +42,7 @@ public class DeleteServlet extends HttpServlet {
 
                 int rowsAffected = pstm.executeUpdate();
                 if (rowsAffected > 0) {
-                    req.getRequestDispatcher("Dashboard").forward(req, resp);
+                    resp.sendRedirect("Dashboard");
                 } else {
                     resp.getWriter().write("No record found to delete.");
                 }

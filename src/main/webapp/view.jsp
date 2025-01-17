@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <html>
+
 <body>
 
 <%
@@ -11,7 +12,8 @@
 
 %>
 
-<table border="1">
+<h1>View Data</h1>
+<table>
     <tr>
         <th>Name</th>
         <th>Email</th>
@@ -38,6 +40,7 @@
     </tr>
     <% } %>
 </table>
+
 
 </body>
 </html>

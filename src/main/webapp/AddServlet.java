@@ -6,12 +6,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.*;
 
-@WebServlet("")
+@WebServlet("/AddServlet")
 public class AddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,8 +20,7 @@ public class AddServlet extends HttpServlet {
         String course = req.getParameter("course");
         String year_of_study = req.getParameter("Year_of_Study");
 
-
-        if(name !="" &&  email!="" && phone !="" && course != "" && year_of_study!=""){
+        if(name !=null && !name.isEmpty() &&  email!=null && !email.isEmpty() && phone !=null && !phone.isEmpty() && course != null && !course.isEmpty() && year_of_study!=null && !year_of_study.isEmpty()){
             try{
                 ServletContext ctx = getServletContext();
 
@@ -33,32 +31,45 @@ public class AddServlet extends HttpServlet {
                 Class.forName("org.postgresql.Driver");
 
                 try (Connection con = DriverManager.getConnection(url,username,password) ){
-                    PreparedStatement pstm = con.prepareStatement("INSERT INTO students ('name','email','phone','course','year_of_study' ) values(?,?,?,?,?)");
-                   // pstm.setString(1,);
-//                    if(rs.next()){
-//                        HttpSession session = req.getSession();
-//                        session.setAttribute("login_id",login_id);
-//                        session.setMaxInactiveInterval(300);
-//                        resp.sendRedirect("Dashboard");
-//                    }
-//                    else{
-//                        req.setAttribute("errorMessage","Invalid Credentials :( ");
-//                        req.getRequestDispatcher("login.jsp").forward(req,resp);
-//                    }
+
+                    //Checking for user is alredy there or not
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("select email from students where email ='"+email+"' ");
+                    if(rs.next()) {
+                        req.setAttribute("errorMessage", "Email already exists :(");
+                        req.getRequestDispatcher("add.jsp").forward(req, resp);
+                        return;
+                    }
+
+                    //Actual Insertion is here
+                    PreparedStatement pstm = con.prepareStatement("INSERT INTO students (name,email,phone,course,year_of_study ) values(?,?,?,?,?)");
+                    pstm.setString(1, name);
+                    pstm.setString(2, email);
+                    pstm.setString(3, phone);
+                    pstm.setString(4, course);
+                    pstm.setInt(5, Integer.parseInt(year_of_study));
+
+                    int insertedRaw = pstm.executeUpdate();
+                    if (insertedRaw > 0) {
+                        req.setAttribute("errorMessage", "Data Inserted :) ");
+                        req.getRequestDispatcher("add.jsp").forward(req, resp);
+                    } else {
+                        req.setAttribute("errorMessage", "Something Went Wrong, Try Again! ");
+                        req.getRequestDispatcher("add.jsp").forward(req, resp);
+                    }
+
                 }
                 catch (SQLException e){
-                    //Make this Better
                     System.out.println(e.getMessage());
                 }
             }
             catch(ClassNotFoundException e){
-                //Make this Better
                 System.out.println(e.getMessage());
             }
         }
         else {
             req.setAttribute("errorMessage","All Fields Required!! ");
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("add.jsp").forward(req,resp);
         }
     }
 }
